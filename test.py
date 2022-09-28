@@ -1,10 +1,11 @@
+import zipapp
 import torch
 
 
-x=torch.FloatTensor(10)
-y=torch.FloatTensor(10)
-c=(x,y)
-a,b=c
+x=torch.zeros(10,2,3)
+y=torch.ones(10,3)
+x[:,0,:]=y
+z=x[:,0,:]
 
-print(a.size())
-print(b.size())
+print(z.size())
+
