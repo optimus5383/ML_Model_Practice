@@ -39,6 +39,10 @@ void multiply_matrices(int row1,int column1,int row2,int column2,float A[row1][c
         }
     }
 }
+float relu(double x) {
+    return x > 0 ? x : 0;
+}
+
 
 int main(void){
 
@@ -56,10 +60,7 @@ int main(void){
 
     float Layer1[8][1]
     float Layer2[8][1]
-
-    
-    
-    
+  
     // data import part but in this code use number for testing
     
     float data[5] ={-0.4 , 4, 1, 2, 2};
@@ -69,13 +70,21 @@ int main(void){
     // first Layer Pass it going to 5*1 input 8*1 output 
     multiply_matrices(5,8,8,1,w1,input,Layer1);
     add_matrices(8,1,Layer1,b1);
+    
+    for (int i=0; i<8;i++){
+        Layer1[i][1] = relu(Layer1[i][1]);
+    }
+
 
     multiply_matrices(8,8,8,1,w2,Layer1,Layer2);
     add_matrices(8,1,Layer2,b2);
+    
+    for (int i=0; i<8;i++){
+        Layer2[i][1] = relu(Layer2[i][1]);
+    }
 
     multiply_matrices(1,8,8,1,w3,Layer2,output);
     add_matrices(1,1,output,b3);
-
 
     return 0;
 }
